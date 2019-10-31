@@ -1,5 +1,5 @@
 """
-Plotting Metrics
+Metrics and plots of metrics
 """
 import pandas as pd
 import numpy as np
@@ -48,6 +48,9 @@ def plot_confusion_matrix(cm, classes, normalize=False,
     PARAMS:
         cm: the confusion matrix
         classes: list of unique class labels
+        normalize: boolean flag whether to normalize values
+        title: figure title
+        cmap: colormap scheme
     """
     # View percentages
     if normalize:
@@ -134,10 +137,9 @@ def ks_roc_prc_plot(targets, scores, FIGWIDTH=15, FIGHEIGHT=6, FONTSIZE=14):
         targets: list of true target labels
         scores: list of predicted labels or scores
     RETURNS:
-        fpr: false positive rate
-        tpr: true positive rate
-        thresholds: thresholds used for the ROC curve
-        auc: Area under the ROC Curve
+        roc_results: dict of ROC results: {'tpr', 'fpr', 'thresholds', 'AUC'}
+        prc_results: dict of PRC results: {'precision', 'recall', 
+                                           'thresholds', 'AUC'}
         fig, axs: corresponding handles for the figure and axis
     '''
     # Compute ROC

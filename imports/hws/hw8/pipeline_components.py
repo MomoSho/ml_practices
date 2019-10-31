@@ -1,3 +1,8 @@
+"""
+Collection of class objects to utilize as Pipeline Components for data
+pre-processing
+"""
+
 import pandas as pd
 import numpy as np
 import scipy.stats as stats
@@ -56,6 +61,7 @@ def computeweights(length=3, sig=1):
     kernel = stats.norm.pdf(x, scale=sig)
     return kernel / kernel.sum()
 
+# Pipeline component: filter data with Gaussian kernel
 class GaussianFilter(BaseEstimator, TransformerMixin):
     def __init__(self, attribs=None, kernelsize=3, sig=1):
         self.attribs = attribs

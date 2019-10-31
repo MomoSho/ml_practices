@@ -1,3 +1,6 @@
+"""
+Functions for constructing data visualizations
+"""
 import pandas as pd
 import numpy as np
 import itertools 
@@ -72,6 +75,13 @@ def featureplots(X, feature_names):
         myplots(x, feature_name)
 
 def scatter_corrplots(X, feature_names, corrfmt="%.3f", FIGW=15):
+    '''
+    Construct scatter matrix of feature correlations
+    PARAMS:
+        X: full data set
+        feature_names: list of the feature names for the columns
+        corrfmt: string format for the correlation when printed on the plots
+    '''
     ncorrs = len(feature_names)
     corrs = np.corrcoef(X.T)
     thresh = .6
@@ -79,6 +89,7 @@ def scatter_corrplots(X, feature_names, corrfmt="%.3f", FIGW=15):
     fig, axs = plt.subplots(nrows=ncorrs, ncols=ncorrs, figsize=(FIGW, FIGW))
     for f1, f1_name in enumerate(feature_names):
         for f2, f2_name in enumerate(feature_names):
+            # Correlation colorimage
             if f1 < f2:
                 cr = corrs[f1, f2]
                 im = axs[f1, f2].imshow(np.array([[cr, cr], [cr, cr]]), 
@@ -90,8 +101,10 @@ def scatter_corrplots(X, feature_names, corrfmt="%.3f", FIGW=15):
                 cbar = axs[f1, f2].figure.colorbar(im, ax=axs[f1, f2])
                 cbar.ax.set_ylabel("Pearson Correlation", rotation=-90, va="bottom")
 
+            # Feature histogram
             if f1 == f2:
                 axs[f1, f2].hist(X[:, f1], color='green')
+            # Feature scatter plot
             if f1 > f2:
                 axs[f1, f2].scatter(X[:, f2], X[:, f1], s=1, alpha=.7)
 
