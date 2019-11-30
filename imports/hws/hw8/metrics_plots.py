@@ -135,7 +135,7 @@ def ks_roc_prc_plot(targets, scores, FIGWIDTH=15, FIGHEIGHT=6, FONTSIZE=14):
     precision
     PARAMS:
         targets: list of true target labels
-        scores: list of predicted labels or scores
+        scores: list of prediction scores
     RETURNS:
         roc_results: dict of ROC results: {'tpr', 'fpr', 'thresholds', 'AUC'}
         prc_results: dict of PRC results: {'precision', 'recall', 
@@ -183,7 +183,7 @@ def ks_roc_prc_plot(targets, scores, FIGWIDTH=15, FIGHEIGHT=6, FONTSIZE=14):
     
     # Generate precision-recall Curve plot
     ax[2].plot(recall, precision, color='b')
-    ax[2].plot([0,1], [1,0], 'r--')
+    ax[2].plot([0,0,1], [1,pos_frac,pos_frac], 'r--')
     ax[2].set(xlabel='Recall', ylabel='Precision')
     ax[2].set_aspect('equal', 'box')
     auc_prc_text = plt.text(.2, .95, "PR AUC = %.4f" % auc_prc, 
