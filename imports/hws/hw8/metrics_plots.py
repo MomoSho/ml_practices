@@ -119,7 +119,7 @@ def confusion_mtx_colormap(mtx, xnames, ynames, cbarlabel=""):
     lbl = np.array([['TN', 'FP'], ['FN', 'TP']])
     for i in range(nyvars):
         for j in range(nxvars):
-            text = ax.text(j, i, "%s = %.3f" % (lbl[i,j], mtx[i, j]),
+            text = ax.text(j, i, "%s = %d" % (lbl[i,j], mtx[i, j]),
                            ha="center", va="center", color="k")
             #text.set_path_effects([peffects.withStroke(linewidth=2, 
             #foreground='w')])
